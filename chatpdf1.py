@@ -41,13 +41,21 @@ def get_vector_store(text_chunks):
 
 
 def get_conversational_chain():
-    prompt_template = """
-    Answer the question as detailed as possible from the provided context, make sure to provide all the details, if the answer is not in
-    provided context just say, "answer is not available in the context", don't provide the wrong answer\n\n
-    Context:\n {context}?\n
-    Question: \n{question}\n
+    # prompt_template = """
+    # Answer the question as detailed as possible from the provided context, make sure to provide all the details, if the answer is not in
+    # provided context just say, "answer is not available in the context", don't provide the wrong answer\n\n
+    # Context:\n {context}?\n
+    # Question: \n{question}\n
+    #
+    # Answer:
+    # """
 
-    Answer:
+    prompt_template = """
+    Responda a questão o mais detalhado possível utilizando o contexto fornecido\n\n
+    Contexto:\n {context}?\n
+    Questão: \n{question}\n
+
+    Resposta:
     """
 
     model = ChatGoogleGenerativeAI(model="gemini-pro",
@@ -72,7 +80,7 @@ def user_input(user_question):
         , return_only_outputs=True)
 
     print(response)
-    st.write("Reply: ", response["output_text"])
+    st.write("Resposta: ", response["output_text"])
 
 
 def main():
